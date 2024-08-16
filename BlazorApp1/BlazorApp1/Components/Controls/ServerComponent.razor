@@ -1,13 +1,23 @@
-﻿<div data-name="@server.Name"
-    style="@($"color:{(server.IsOnline?"green":"red")}")">
-    @server.Name is in @server.City that is @(server.IsOnline?"online":"offline")
-</div>
+﻿
+@if (server != null)
+{
+    <EditForm Model="server" FormName="serverComponentForm">
+        <div data-name="@server.Name"
+             style="@($"color:{(server.IsOnline?"green":"red")}")">
+            @server.Name is in @server.City that is @(server.IsOnline?"online":"offline")
+            &nbsp;
+            <button type="submit" class="btn btn-primary">Turn on/off</button>
+        </div>
+    </EditForm>
+}
+
 
 @code {
-    private Server server = new Server
-        {
-            Name = "Server 1",
-            City = "Toronto"
-        };
+    
+    
+    [SupplyParameterFromForm]
+    private Server? server { get; set; }
+    
+    
 
 }
